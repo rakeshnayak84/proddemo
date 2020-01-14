@@ -1,0 +1,24 @@
+.prod-header {
+    height: 70px;
+    padding: 20px 35px;
+}
+
+$light-blue: #378ce2;
+
+.light-blue {
+    color: $light-blue;
+}
+
+.left-line {
+    border-left: 3px solid #e2e2e2;
+}
+
+.hover-pointer {
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+.star-rating {
+    color: #e8661a;
+}

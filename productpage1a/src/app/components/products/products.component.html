@@ -1,0 +1,30 @@
+<section class="container-fluid">
+    <div class="row bg-dark prod-header">
+        <div class="col-9">
+            <h4 class="text-secondary ">Product Information</h4>
+        </div>
+    </div>
+    <div class="row text-center mt-4">
+        <div class="col-12">
+            <h3 class="text-center light-blue">Products Catalog</h3>
+        </div>
+    </div>    
+    <table class="table table-hover mt-3">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">Product Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <ng-container *ngFor="let product of details; let i = index">
+            <tr class="hover-pointer" [routerLink]="['/product-details/', product.productId]">
+            <td class="lead text-primary">{{product.productName}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.price}}</td>
+            </tr>        
+        </ng-container>
+        </tbody>
+    </table>
+</section>
