@@ -1,0 +1,57 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: prodinfo-gateway
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: prodinfo
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - prodinfo-gateway
+  http:
+  - match:
+     - uri:
+        prefix: /detailsproxy/details
+    rewrite:
+      uri: /details
+    route:
+    - destination:
+        host: details
+        port:
+          number: 8080
+  - match:
+    - uri:
+        prefix: /reviewsproxy/reviews
+    rewrite:
+      uri: /reviews
+    route:
+    - destination:
+        host: reviews
+        port:
+          number: 8080
+  - match:
+    - uri:
+        exact: /products
+    - uri:
+        prefix: /
+    - uri:
+        prefix: /product-details
+    route:
+    - destination:
+        host: productpage
+        port:
+          number: 8080
